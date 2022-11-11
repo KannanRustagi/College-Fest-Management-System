@@ -1,4 +1,3 @@
-
 #include<iostream>
 #include <string>
 #include <vector>
@@ -45,17 +44,33 @@ class Participant : public Student{
 };
 int Participant::ticket_no = 0;
 
+class CoreTeam : public Student{
+    public:
 
-class Coordinator : public Student{
+    //the division of the fest of which the core team member is a part
+    string division;
+    //the designation the core team member holds in their event eg treasurer, public relation, event lead
+    string designation;
+    CoreTeam(string division, string designation){
+        this->division=division;
+        this->designation=designation;
+    }
+    //the list of coordinators which work under a particular core team member
+    vector <string> coordinator_list;
+    void add_coordinator_names(string coordinator)
+    
+    
+    
+};
+
+class Coordinator : public CoreTeam{
+    public:
+    
     
 };
 
 
-class CoreTeam : public Student{
-    public:
-    string designation;
-    //eg treasurer, public relation, event lead
-};
+
 
 
 int main() {
@@ -68,12 +83,28 @@ int main() {
     Student st(student_name, student_id);
     
     // st.display();
-    
-    Participant p(student_name, student_id);
-    
-    p.add_events("Dance");
-    p.display_events();
-   
 
-    return 0;
+    cout<<"Select one of the following options:"<<endl;
+    int choice;
+    cout<<"Choose 1 if you are a participant"<<endl;
+    cout<<"Choose 2 if you are a core team member"<<endl;
+    cout<<"Choose 1 if you are a coordinator"<<endl;
+    cout<<"Choose 1 if you are part of the team working under coordinators"<<endl;
+    cin>>choice;
+
+    if(choice==1)
+    {
+        Participant p(student_name, student_id);
+        p.add_events("Dance");
+        p.display_events();
+    }
+    else if(choice==2)
+    {
+        CoreTeam c(student_name, student_id);
+    }
+
+    
+    
+    
+   return 0;
 }
