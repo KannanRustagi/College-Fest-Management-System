@@ -22,18 +22,15 @@ class Events{
         cout<<"Event "<<this->title<<" is scheduled to be held on date "<<this->date<<" at "<<this->venue<<endl;
     }
 
-
-
 };
 
 class Student{
     public:
     string name;
     string student_id;
-    Student()
-    {
-        
-    }
+    
+    Student(){}
+    
     Student(string name, string student_id)
     {
         this->name=name;
@@ -84,7 +81,6 @@ class CoreTeam : public Student{
 
     void display(){
         cout<<"Role is Core Team member, part of "<<this->division<<" as a  "<<this->designation<<endl;
-        
     }
     
 };
@@ -106,7 +102,6 @@ class Coordinator : public CoreTeam{
     {
         cout<<"Coordinator "<<this->name<<" is working under "<<this->CoreTeamHead<<" in the division "<<this->division<<endl;
     }
-
 };
 
 class Workforce_Member : public Coordinator{
