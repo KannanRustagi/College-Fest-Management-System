@@ -1,6 +1,7 @@
 #include<iostream>
 #include <string>
 #include <vector>
+#include <map>
 using namespace std;
 class Student{
     public:
@@ -51,30 +52,54 @@ class CoreTeam : public Student{
     string division;
     //the designation the core team member holds in their event eg treasurer, public relation, event lead
     string designation;
-    CoreTeam(string division, string designation){
+    CoreTeam(Student &s,  string division, string designation){
         this->division=division;
         this->designation=designation;
     }
+    CoreTeam(){}
+
+    void display(){
+        cout<<"Role is Core Team member, part of "<<this->division<<" as a  "<<this->designation<<endl;
+        
+    }
     //the list of coordinators which work under a particular core team member
-    vector <string> coordinator_list;
-    void add_coordinator_names(string coordinator)
-    
+    // vector <Coordinator> coordinator_list;
+
+    // void add_coordinator_names(Coordinator &co)
+    // {
+    //     coordinator_list.push_back(co);
+    // }
+
+    // map <Coordinator, string> task_assigning;
     
     
 };
 
 class Coordinator : public CoreTeam{
     public:
-    
-    
+    string division;
+    string CoreTeamHead;
+
+    Coordinator(string CoreTeamHead, string division)
+    {
+        this->CoreTeamHead=CoreTeamHead;
+        this->division= division;
+    }
+
+    void display()
+    {
+        cout<<"Coordinator "<<this->name<<" is working under "<<this->CoreTeamHead<<" in the division "<<this->division<<endl;
+    }
+
 };
 
 
-
-
-
 int main() {
+
     cout<<"Welcome to College Fest Management System"<<endl;
+    int exit=1;
+    while(exit)
+    {
     string student_name, student_id;
     cout<<"Enter student name: ";
     cin>>student_name;
@@ -88,8 +113,9 @@ int main() {
     int choice;
     cout<<"Choose 1 if you are a participant"<<endl;
     cout<<"Choose 2 if you are a core team member"<<endl;
-    cout<<"Choose 1 if you are a coordinator"<<endl;
-    cout<<"Choose 1 if you are part of the team working under coordinators"<<endl;
+    cout<<"Choose 3 if you are a coordinator"<<endl;
+    cout<<"Choose 5 if you are part of the team working under coordinators"<<endl;
+    cout<<"Choose 6 if you want to exit the portal"<<endl;
     cin>>choice;
 
     if(choice==1)
@@ -99,12 +125,43 @@ int main() {
         p.display_events();
     }
     else if(choice==2)
-    {
-        CoreTeam c(student_name, student_id);
+    {   
+        string division;
+        cout<<"Enter the division you are a part of:"<<endl;
+        cin>>division;
+
+        string designation;
+        cout<<"Enter your designation:"<<endl;
+        cin>>designation;
+
+
+        CoreTeam student_name(st, division, designation);
+        st.display();
+        student_name.display();
+
+    }
+    else if(choice==3)
+    {   
+        string CoreTeamhead;
+        string division;
+
+        cout<<"Enter you division: "<<endl;
+        cin>>division;
+
+        cout<<"Enter the name of the core team head under which you are working: "<<endl;
+        cin>>CoreTeamhead;
+
+        Coordinator student_name(CoreTeamhead, division);
+        student_name.display();
+
     }
 
-    
-    
-    
-   return 0;
+    else if(choice == 6)
+    {
+        exit=0;
+    }
+
+    cout<<"This log is complete. Next entry"<<endl;
+    }
+    return 0;
 }
